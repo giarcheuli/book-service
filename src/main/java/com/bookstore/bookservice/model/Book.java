@@ -6,14 +6,12 @@ This will be used to map objects to rows in a database table.
 
 package com.bookstore.bookservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
+@Table(name = "Books")
 public class Book {
 
     @Id
@@ -22,9 +20,9 @@ public class Book {
 
     private String title;
     private String author;
+    @Column(unique = true)
     private String isbn;
     private int yearPublished;
-    private double price;
 
     public Book() {
     }
@@ -51,10 +49,6 @@ public class Book {
         return yearPublished;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
     // Setters
 
     public void setId(Long id) {
@@ -77,10 +71,6 @@ public class Book {
         this.yearPublished = yearPublished;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     // Equals, hashCode, and toString methods
 
     @Override
@@ -89,7 +79,6 @@ public class Book {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
         return yearPublished == book.yearPublished &&
-                Double.compare(book.price, price) == 0 &&
                 Objects.equals(id, book.id) &&
                 Objects.equals(title, book.title) &&
                 Objects.equals(author, book.author) &&
@@ -98,7 +87,7 @@ public class Book {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, isbn, yearPublished, price);
+        return Objects.hash(id, title, author, isbn, yearPublished);
     }
 
     @Override
@@ -109,7 +98,6 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", yearPublished=" + yearPublished +
-                ", price=" + price +
                 '}';
     }
 }

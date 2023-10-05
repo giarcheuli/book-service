@@ -38,7 +38,6 @@ public class BookService {
             existingBook.setAuthor(bookDetails.getAuthor());
             existingBook.setIsbn(bookDetails.getIsbn());
             existingBook.setYearPublished(bookDetails.getYearPublished());
-            existingBook.setPrice(bookDetails.getPrice());
             return bookRepository.save(existingBook);
         } else {
             return null;
