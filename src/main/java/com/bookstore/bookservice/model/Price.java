@@ -17,7 +17,10 @@ public class Price {
     @MapsId
     @JoinColumn(name = "book_id")
     private com.bookstore.bookservice.model.Book book;
-
+    @Transient
+    public String getIsbn() {
+        return this.book != null ? this.book.getIsbn() : null;
+    }
     public Price() {
     }
 
